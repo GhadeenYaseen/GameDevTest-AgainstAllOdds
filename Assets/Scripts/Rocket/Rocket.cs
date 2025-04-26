@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /*
     rocket specifications:
         -thrown by enemy
         -picked up automatically by player
-        -thrown back by player when right mouse button is clicked
+        -thrown back by player when button is clicked
 
     pick up logic:
         -on trigger enter (player nears bullet), auto pick up
@@ -18,13 +17,12 @@ using UnityEngine;
     non-explode-able
 */
 
-[RequireComponent(typeof(CapsuleCollider)), RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class Rocket : MonoBehaviour, IPickable
 {
-    [SerializeField] private float throwPower = 3f;
+    [SerializeField] private float throwPower = 3f, lifeCycle;
 
     private CapsuleCollider _collider;
-    private Rigidbody _rigidbody;
     private Inventory _playerInventory;
 
     private Transform _holdPosition;
@@ -33,12 +31,11 @@ public class Rocket : MonoBehaviour, IPickable
     private void Awake() 
     {
         _collider = GetComponent<CapsuleCollider>();
-        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update() 
     {
-        if(Input.GetButtonDown("Fire1") && _playerInventory.SlotFull() == true &&_currentPlayer !=null)
+        if(Input.GetButtonDown("Fire1") && _playerInventory.SlotFull() == true && _currentPlayer !=null)
         {
             Throw();
         }
@@ -75,7 +72,7 @@ public class Rocket : MonoBehaviour, IPickable
             Debug.Log("my guy check ur inventory :/ \n like do u even have one bruh? here i gib u one ;3");
             _playerInventory = gameObject.AddComponent<Inventory>();
         }
-        catch(System.Exception)
+        catch(Exception)
         {
             Debug.Log("tsk dude gg ig");
             throw;
@@ -92,23 +89,21 @@ public class Rocket : MonoBehaviour, IPickable
         gameObject.transform.parent = _holdPosition;
 
         _collider.enabled = false;
-        _rigidbody.useGravity =false;
-        _rigidbody.freezeRotation = true;
-        _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void Throw()
     {
         gameObject.transform.parent = null;
 
-        //_collider.enabled = true;
-        _rigidbody.useGravity =true;
-        _rigidbody.freezeRotation = false;
-        _rigidbody.constraints = RigidbodyConstraints.None;
-
         Vector3 throwDirection =  _currentPlayer.transform.forward;
-        _rigidbody.AddForce(throwDirection * throwPower);
+        gameObject.transform.DOMove(throwDirection * throwPower, lifeCycle).SetEase(Ease.OutExpo).OnComplete(
 
-        //_playerInventory.SetSlotState(false);
+            ()=> {
+                    Debug.Log("reuse, ecece");
+                    gameObject.transform.parent = null;
+                    _playerInventory.SetSlotState(false);
+                    _collider.enabled = true;
+                }
+        );
     }
 }
