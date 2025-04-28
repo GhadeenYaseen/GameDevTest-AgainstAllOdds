@@ -208,7 +208,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 66f5233f0b616794f9e4243a21c2efb0,
         type: 3}
       propertyPath: m_Name
-      value: Kamikaze
+      value: Enemy 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -306,7 +306,7 @@ PrefabInstance:
     - target: {fileID: 9137032837993464747, guid: d66c23583a584ef4195dbea312c0b2a7,
         type: 3}
       propertyPath: m_Name
-      value: Giant01 - Golem Texture02 Recolor04
+      value: Enemy 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -698,7 +698,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b7825967585e2744f949fa26531a2491,
         type: 3}
       propertyPath: m_Name
-      value: FemKnightModel@Walking
+      value: Woman knight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -994,7 +994,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cd90399b0cd977749aa5f6614afa6548,
         type: 3}
       propertyPath: m_Name
-      value: Dwarf Idle
+      value: Man knight
       objectReference: {fileID: 0}
     - target: {fileID: 1768770345851272746, guid: cd90399b0cd977749aa5f6614afa6548,
         type: 3}
