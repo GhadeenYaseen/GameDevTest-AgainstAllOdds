@@ -4,14 +4,18 @@ using UnityEngine;
 public class EnemyPatrolState : EnemyBaseState
 {
     float patrolCycleLength;
+    Vector3 targetPosition;
 
     public override void StateEnter(EnemyController enemy)
     {
         patrolCycleLength = enemy.patrolCycleLength;
 
         Debug.Log("on start patrol");
+        DOTween.Restart("enemy"); 
+        
         // Get the target position
-        Vector3 targetPosition = enemy.destination.position;
+        targetPosition = enemy.destination.position;
+        
 
         // move towards X linearly
         enemy.gameObject.transform.DOMoveX(targetPosition.x, enemy.moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetId("enemy");
@@ -28,15 +32,15 @@ public class EnemyPatrolState : EnemyBaseState
     
     public override void StateUpdate(EnemyController enemy)
     {
-        
         //start timer to patrol for a while then start first attack
-        patrolCycleLength -= Time.deltaTime; 
-        Debug.Log("time left to walk: " + patrolCycleLength);
+        patrolCycleLength -= Time.deltaTime;
         
         if(patrolCycleLength < 0) 
         { 
-            DOTween.Pause("enemy"); 
-            enemy.SwitchState(enemy.flameThrowerState);
+            DOTween.Pause("enemy");
+            //targetPosition.x *=-1;
+            enemy.SwitchState(enemy.eagleFliesState);
         } 
     }
+    
 }

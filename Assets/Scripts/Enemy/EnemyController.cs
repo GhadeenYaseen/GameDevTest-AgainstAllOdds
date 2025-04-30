@@ -7,13 +7,31 @@ public class EnemyController : MonoBehaviour
 {
     /*in future, replace attack settings w scriptable objects for more زلّامي code*/
 
-    [Header("Patrol Movement Configuration")] /*pause patrol and resume by using -> DoTween.Pause("enemy"); .Play("enemy"); */
+    [Header("Patrol Movement Config")] /*pause patrol and resume by using -> DoTween.Pause("enemy"); .Play("enemy"); */
     public Transform destination;
+    public Transform startPos;
     public float moveDuration = 5f;
     public float waveAmplitude = 2f;
     public float waveFrequency = 2f;
     public float patrolCycleLength = 6f;
     [HideInInspector] public Vector3 _startPosition;
+
+    [Header("Flame Thrower Attack Config")] /*warm up effect could be -> inc light power from heart of enemy*/
+    public ParticleSystem flameBeamParticle;
+
+    [Header("Eagle Flies Attack Config")]
+    public Transform offScreenPosition;
+    public float takeOffDuration;
+    public float returnToOGPosDuration;
+    public Ease takeOffEase;
+    public float slamPointsSphereRadius;
+    public GameObject shadowObject;
+
+    [Header("CameraShake Effect Config")]
+    public float magn;
+    public float rough; 
+    public float fadeIn;
+    public float fadeOut;
 
     EnemyBaseState currentState;
 
@@ -23,6 +41,7 @@ public class EnemyController : MonoBehaviour
     public EnemyPatrolState patrolState = new EnemyPatrolState();
     public EnemyHurtState hurtState = new EnemyHurtState();
 
+    [HideInInspector] public GameObject[] _players;
     private List<EnemyBaseState> attackPattern = new List<EnemyBaseState>();
     private int _currentStateIndex = 0;
 
@@ -36,7 +55,9 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        _startPosition = transform.position;
+        _startPosition = startPos.position;
+        _players = GameObject.FindGameObjectsWithTag("Player");
+
         InitAttackPattern();
     }
 
