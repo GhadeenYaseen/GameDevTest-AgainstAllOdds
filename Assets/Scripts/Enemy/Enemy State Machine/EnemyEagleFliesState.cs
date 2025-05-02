@@ -18,9 +18,7 @@ public class EnemyEagleFliesState : EnemyBaseState
         -back to patroling
     */
 
-    Vector3 lastEnemyPosition;
-    Vector2 point;
-    List<Transform> players = new List<Transform>();
+    Vector3 point;
 
     public override void StateEnter(EnemyController enemy)
     {
@@ -33,7 +31,7 @@ public class EnemyEagleFliesState : EnemyBaseState
         // select rand point in range to slam to
         EagleFlySeq.AppendCallback(()=>
         {
-            point = enemy._players[Random.Range(0,1)].transform.position; //choose one of the players as target
+            point = enemy._players[Random.Range(0,2)].transform.position; //choose one of the players as target
             enemy.shadowObject.transform.position = point;
             enemy.shadowObject.SetActive(true);
         });
@@ -41,12 +39,15 @@ public class EnemyEagleFliesState : EnemyBaseState
         EagleFlySeq.AppendInterval(1f);
 
         // slam
-        EagleFlySeq.Append(enemy.transform.DOMove(enemy.shadowObject.transform.position, enemy.takeOffDuration).SetEase(enemy.takeOffEase));
+        EagleFlySeq.AppendCallback(()=>
+        {
+            enemy.transform.DOMove(point, enemy.takeOffDuration).SetEase(enemy.takeOffEase);
+        });
         
         // slam effect
         EagleFlySeq.AppendCallback(()=>
         {
-            enemy.shadowObject.SetActive(false);
+            //enemy.shadowObject.SetActive(false);
             CameraShaker.Instance.ShakeOnce(enemy.magn, enemy.rough, enemy.fadeIn, enemy.fadeOut);
         });
 
@@ -65,7 +66,7 @@ public class EnemyEagleFliesState : EnemyBaseState
 
     public override void StateUpdate(EnemyController enemy)
     {
-        
+          
     }
 
 }

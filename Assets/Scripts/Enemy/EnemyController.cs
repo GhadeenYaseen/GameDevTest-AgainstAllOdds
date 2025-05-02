@@ -33,6 +33,13 @@ public class EnemyController : MonoBehaviour
     public float fadeIn;
     public float fadeOut;
 
+    [Header("Rocket Launcher Attack Config")]
+    public Transform launchPos1; // boom rocket1
+    public Transform launchPos2; //pickable rocket
+    public Transform launchPos3; // boom rocket2
+    public GameObject bullsEye1, bullsEye2;
+
+
     EnemyBaseState currentState;
 
     public EnemyEagleFliesState eagleFliesState = new EnemyEagleFliesState();
@@ -43,20 +50,16 @@ public class EnemyController : MonoBehaviour
 
     [HideInInspector] public GameObject[] _players;
     private List<EnemyBaseState> attackPattern = new List<EnemyBaseState>();
-    private int _currentStateIndex = 0;
 
-    /*
-        attack patterns as follow:
-        - a list of enemy states, with patrol in between each state, as follow:
-            list[patrol, flame, patrol, rocket, patrol, eagle]
-        -on each state complete, we increase the current index, then switch state to the value of the new index
-    
-    */
+    [HideInInspector] public Vector3 _ogPositionBullseye1, _ogPositionBullseye2;
 
     private void Awake()
     {
         _startPosition = startPos.position;
         _players = GameObject.FindGameObjectsWithTag("Player");
+
+        _ogPositionBullseye1 = bullsEye1.transform.localPosition;
+        _ogPositionBullseye2 = bullsEye2.transform.localPosition;
 
         InitAttackPattern();
     }
