@@ -6,5 +6,5 @@ public interface IAmmo
 {
     void OnRelod();
     void OnFire();
-    void OnImpact();
+    void OnImpact(Collision collision);
 }

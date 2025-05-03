@@ -41,7 +41,7 @@ public class EnemyRocketLauncherState : EnemyBaseState
             }
         });
 
-        launcherSeq.AppendInterval(3f);
+        launcherSeq.AppendInterval(2f);
 
         // reset
         launcherSeq.AppendCallback(()=>
@@ -55,8 +55,6 @@ public class EnemyRocketLauncherState : EnemyBaseState
             enemy.bullsEye1.SetActive(false);
             enemy.bullsEye2.SetActive(false);
 
-            launcherSeq.AppendInterval(2f);
-
             foreach (Transform gun in enemy.rocketLaunchPositions)
             {
                 gun.gameObject.SetActive(false);
@@ -65,9 +63,8 @@ public class EnemyRocketLauncherState : EnemyBaseState
 
         launcherSeq.AppendCallback(()=>
         {
-            enemy.SwitchState(enemy.patrolState);
+            enemy.SwitchState(enemy.flameThrowerState);
         });
-
     }
 
     public override void StateUpdate(EnemyController enemy)

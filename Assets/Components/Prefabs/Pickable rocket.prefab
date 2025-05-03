@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3219180313293926876
 Transform:
   m_ObjectHideFlags: 0
@@ -56,7 +56,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.13
-  m_Height: 1.41
+  m_Height: 0.59
   m_Direction: 2
   m_Center: {x: 0.34, y: 0.11, z: 0.18}
 --- !u!114 &8327998499944198012
@@ -85,9 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fcacb6db20680428c58f05e67835f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRocket: 1
+  direction: {x: 0, y: -0.2, z: -1}
   bullet: {fileID: 7208127953145965919}
   target: {fileID: 0}
   speed: 0.1
+  rocketSpeed: 10
   ogPos: {x: 0, y: 0, z: 0}
 --- !u!54 &1195110515969652989
 Rigidbody:
@@ -127,7 +130,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 23.469292
+      value: 11.291488
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
@@ -142,7 +145,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61268944
+      value: -0.61273
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
@@ -152,7 +155,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.22475667
+      value: 0.2215
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}

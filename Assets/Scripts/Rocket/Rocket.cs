@@ -120,8 +120,5 @@ public class Rocket : MonoBehaviour, IPickable
             _playerInventory.SetSlotState(false);
         
         _collider.enabled = true;
-
-        Debug.Log("on relod rocket:  parent:" + gameObject.transform.parent + "  position: " + gameObject.transform.localPosition + " point pos: " + _enemyLaunchPoint.localPosition);
-
     }
 }
