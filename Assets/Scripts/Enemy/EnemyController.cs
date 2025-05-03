@@ -34,9 +34,11 @@ public class EnemyController : MonoBehaviour
     public float fadeOut;
 
     [Header("Rocket Launcher Attack Config")]
-    public Transform launchPos1; // boom rocket1
-    public Transform launchPos2; //pickable rocket
-    public Transform launchPos3; // boom rocket2
+
+    public List<Transform> rocketLaunchPositions = new List<Transform>();
+    //public Transform launchPos1; // boom rocket1
+    //public Transform launchPos2; //pickable rocket
+    //public Transform launchPos3; // boom rocket2
     public GameObject bullsEye1, bullsEye2;
 
 

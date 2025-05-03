@@ -32,6 +32,16 @@ public class EnemyRocketLauncherState : EnemyBaseState
         launcherSeq.AppendInterval(1f);
 
         //shoot here
+        launcherSeq.AppendCallback(()=>
+        {
+            foreach (Transform gun in enemy.rocketLaunchPositions)
+            {
+                Debug.Log("waking up guns");
+                gun.gameObject.SetActive(true);
+            }
+        });
+
+        launcherSeq.AppendInterval(3f);
 
         // reset
         launcherSeq.AppendCallback(()=>
@@ -40,13 +50,17 @@ public class EnemyRocketLauncherState : EnemyBaseState
             enemy.bullsEye2.transform.parent = enemy._players[1].transform;
 
             enemy.bullsEye1.transform.localPosition = enemy._ogPositionBullseye1;
-            Debug.Log("bulls eye1 og pos: " + enemy.bullsEye1.transform.position);
             enemy.bullsEye2.transform.localPosition = enemy._ogPositionBullseye2;
 
             enemy.bullsEye1.SetActive(false);
             enemy.bullsEye2.SetActive(false);
 
-            
+            launcherSeq.AppendInterval(2f);
+
+            foreach (Transform gun in enemy.rocketLaunchPositions)
+            {
+                gun.gameObject.SetActive(false);
+            }
         });
 
         launcherSeq.AppendCallback(()=>

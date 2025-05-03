@@ -1,37 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour, IAmmo
 {
-    /*
-        called on update, one target field, be shot towards the target
-    */
+    public GameObject bullet, target;
+    public float speed;
 
-    private void Update() 
-    {
-        
-    }
+    public Vector3 ogPos;
 
     public void OnFire()
     {
-        
+
     }
 
-    /*
-        on collision, enable explolsion particle, deal damage if tag is player, set active false graphics, turn off collider, turn off ui target
-    */
+    void Update()
+    {
+        bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target.transform.position, speed);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        OnImpact();
+    }
 
     public void OnImpact()
     {
-        
+        // play explosion particle
+        // deal damage
+
+        bullet.SetActive(false);
     }
 
-    /*
-        after explosion, set active false, reposition in spawn point
-    */
     public void OnRelod()
     {
-        
+
+    }
+
+    private void OnDisable() 
+    {
+        if(ogPos != null)
+        transform.position = ogPos;
     }
 }

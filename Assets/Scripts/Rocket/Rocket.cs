@@ -20,7 +20,7 @@ using DG.Tweening;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Rocket : MonoBehaviour, IPickable
 {
-    [SerializeField] private float throwPower = 3f, lifeCycle;
+    [SerializeField] private float throwPower = 3f, lifeCycleDuration;
 
     private CapsuleCollider _collider;
     private Inventory _playerInventory;
@@ -28,9 +28,13 @@ public class Rocket : MonoBehaviour, IPickable
     private Transform _holdPosition;
     private GameObject _currentPlayer;
 
+    private Transform _enemyLaunchPoint;
+
     private void Awake() 
     {
         _collider = GetComponent<CapsuleCollider>();
+        _enemyLaunchPoint = gameObject.transform.parent.transform;
+        Debug.Log("bullet awake parent:" + _enemyLaunchPoint.gameObject.name);
     }
 
     private void Update() 
@@ -96,7 +100,7 @@ public class Rocket : MonoBehaviour, IPickable
         gameObject.transform.parent = null;
 
         Vector3 throwDirection =  _currentPlayer.transform.forward;
-        gameObject.transform.DOMove(throwDirection * throwPower, lifeCycle).SetEase(Ease.OutExpo).OnComplete(
+        gameObject.transform.DOMove(throwDirection * throwPower, lifeCycleDuration).SetEase(Ease.OutExpo).OnComplete(
 
             ()=> {
                     Debug.Log("reuse, ecece");
@@ -105,5 +109,19 @@ public class Rocket : MonoBehaviour, IPickable
                     _collider.enabled = true;
                 }
         );
+    }
+
+    public void OnRelod()
+    {
+        gameObject.transform.parent = _enemyLaunchPoint;
+        gameObject.transform.localPosition = _enemyLaunchPoint.localPosition;
+        
+        if(_playerInventory != null)
+            _playerInventory.SetSlotState(false);
+        
+        _collider.enabled = true;
+
+        Debug.Log("on relod rocket:  parent:" + gameObject.transform.parent + "  position: " + gameObject.transform.localPosition + " point pos: " + _enemyLaunchPoint.localPosition);
+
     }
 }

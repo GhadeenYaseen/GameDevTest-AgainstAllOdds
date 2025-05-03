@@ -39,7 +39,7 @@ public class EnemyPatrolState : EnemyBaseState
         { 
             DOTween.Pause("enemy");
             //targetPosition.x *=-1;
-            enemy.SwitchState(enemy.eagleFliesState);
+            enemy.SwitchState(enemy.rocketLauncherState);
         } 
     }
     
