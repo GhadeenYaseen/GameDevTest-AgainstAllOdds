@@ -6,6 +6,8 @@ But who shall win the fight?
 Against All Odds is 3D co-op PC game where two local players work together to defeat an evil boss who has multiple timed attack patterns.
 The game takes place in a fantasy world filled with magic and power.
 
+This is not the final version, as there's always room for imporvement, and higher standards to persue ^_^
+
 ### Game Mechanics
 Two players, one PC, one enemy, infinite fights.
 
