@@ -1,10 +1,13 @@
 using UnityEngine;
 
+/*
+    Handle fire beam attack
+*/
+
 public class EnemyFlameThrowerState : EnemyBaseState
 {
     public override void StateEnter(EnemyController enemy)
     {
-        Debug.Log("begin fire beam cuh");
         enemy.flameBeamParticle.Play();
     }
 
@@ -12,8 +15,7 @@ public class EnemyFlameThrowerState : EnemyBaseState
     {
         if(enemy.flameBeamParticle.isStopped)
         {
-            Debug.Log("fire done");
-            enemy.SwitchState(enemy.patrolState);
+            enemy.SwitchState(enemy.attackPattern[Random.Range(0, enemy.attackPattern.Count)]);
         }
     }
 }

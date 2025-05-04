@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/*
+    Arrows and numpad player using the old input system with unity's character controller
+*/
+
 public class PlayerTwoController : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
@@ -10,7 +14,6 @@ public class PlayerTwoController : MonoBehaviour
 
     void Update()
     {
-
         Vector3 direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         
         if (direction != Vector3.zero)
@@ -33,7 +36,21 @@ public class PlayerTwoController : MonoBehaviour
         {
             characterController.Move(direction * speed * Time.deltaTime);
         }
+    }
 
-        
+     void OnTriggerEnter(Collider other) 
+     {
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            try
+            {
+                gameObject.GetComponent<Health>().TakeDamage(gameObject);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

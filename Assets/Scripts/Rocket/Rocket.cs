@@ -9,12 +9,13 @@ using DG.Tweening;
         -thrown back by player when button is clicked
 
     pick up logic:
-        -on trigger enter (player nears bullet), auto pick up
+        -on trigger enter (player nears bullet), auto pick up (game design decision to ease defeating the boss)
         -player will have a child empty transform, where the rocket will be held, rocket will auto be positioned there
         -if rocket is already picked, dont pick up any more (check bool on player)
-        -if rocket is not picked for 3 seconds, return to pool/deactivate/dissapear
 
     non-explode-able
+
+    ONLY ONE BUTTON TO FIRE FOR BOTH PLAYERS, to increase fun and craziness ;D
 */
 
 [RequireComponent(typeof(CapsuleCollider))]
@@ -22,7 +23,7 @@ public class Rocket : MonoBehaviour, IPickable
 {
     [SerializeField] private float throwPower = 3f, lifeCycleDuration;
 
-    private CapsuleCollider _collider;
+    private CapsuleCollider _rocketCollider;
     private Inventory _playerInventory;
 
     private Transform _holdPosition;
@@ -32,9 +33,8 @@ public class Rocket : MonoBehaviour, IPickable
 
     private void Awake() 
     {
-        _collider = GetComponent<CapsuleCollider>();
+        _rocketCollider = GetComponent<CapsuleCollider>();
         _enemyLaunchPoint = gameObject.transform.parent.transform;
-        Debug.Log("bullet awake parent:" + _enemyLaunchPoint.gameObject.name);
     }
 
     private void Update() 
@@ -45,6 +45,7 @@ public class Rocket : MonoBehaviour, IPickable
         }
     }
 
+    // if rocket is encountered and inventory is empty, equip
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -58,7 +59,20 @@ public class Rocket : MonoBehaviour, IPickable
             }
             else
             {
-                Debug.Log("u already have rocket man, throw it first");
+                Debug.Log("u already have rocket, throw it first");
+            }
+        }
+        else if(other.gameObject.CompareTag("Enemy"))
+        {
+            try
+            {
+                Debug.Log("enemy shot");
+                other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
+            }
+            catch (System.Exception)
+            {
+                    
+                throw;
             }
         }
     }
@@ -68,17 +82,16 @@ public class Rocket : MonoBehaviour, IPickable
         try
         {
             _playerInventory = gameObject.GetComponent<Inventory>();
-            _playerInventory.ID();
             _currentPlayer= gameObject;
         }
         catch (NullReferenceException)
         {
-            Debug.Log("my guy check ur inventory :/ \n like do u even have one bruh? here i gib u one ;3");
+            Debug.Log("check ur inventory :/ \n like do u even have one? here i give u one");
             _playerInventory = gameObject.AddComponent<Inventory>();
         }
         catch(Exception)
         {
-            Debug.Log("tsk dude gg ig");
+            Debug.Log("gg");
             throw;
         }
     }
@@ -92,7 +105,7 @@ public class Rocket : MonoBehaviour, IPickable
         gameObject.transform.position = _holdPosition.position;
         gameObject.transform.parent = _holdPosition;
 
-        _collider.enabled = false;
+        _rocketCollider.enabled = false;
     }
 
     public void Throw()
@@ -101,16 +114,15 @@ public class Rocket : MonoBehaviour, IPickable
 
         Vector3 throwDirection =  _currentPlayer.transform.forward;
         gameObject.transform.DOMove(throwDirection * throwPower, lifeCycleDuration).SetEase(Ease.OutExpo).OnComplete(
-
             ()=> {
-                    Debug.Log("reuse, ecece");
                     gameObject.transform.parent = null;
                     _playerInventory.SetSlotState(false);
-                    _collider.enabled = true;
+                    _rocketCollider.enabled = true;
                 }
         );
     }
 
+    // reset
     public void OnRelod()
     {
         gameObject.transform.parent = _enemyLaunchPoint;
@@ -119,6 +131,6 @@ public class Rocket : MonoBehaviour, IPickable
         if(_playerInventory != null)
             _playerInventory.SetSlotState(false);
         
-        _collider.enabled = true;
+        _rocketCollider.enabled = true;
     }
 }

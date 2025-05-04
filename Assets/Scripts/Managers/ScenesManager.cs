@@ -4,12 +4,15 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Threading.Tasks;
 
+/*
+    Singleton scenes manager with loading screen
+*/
+
 public class ScenesManager : MonoBehaviour
 {
     [HideInInspector] public static ScenesManager ScenesManagerInstance {get; private set;}
     
     [SerializeField] private GameObject loadingCanvas;
-
     [SerializeField] private Slider progressBar;
 
     private float _target;
@@ -27,25 +30,7 @@ public class ScenesManager : MonoBehaviour
         }
     }
 
-    public void StartLoading(string sceneName) 
-    {
-        StartCoroutine(_LoadScene(sceneName));
-    }
-
-    IEnumerator _LoadScene(string scenmeName) 
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(scenmeName);
-        
-        loadingCanvas.SetActive(true);
-
-        while (! operation.isDone) 
-        {
-            yield return null;
-        }
-
-        loadingCanvas.SetActive(false);
-    }
-
+    // load scene, called when ui button calls for changing scenes (play, quit to menu)
     public async void LoadScene(string sceneName)
     {
         progressBar.value = 0;
@@ -59,6 +44,7 @@ public class ScenesManager : MonoBehaviour
         {
             await Task.Delay(1000);
             _target= scene.progress;
+
         } while (scene.progress < 0.9f);
 
         await Task.Delay(1000);
@@ -67,6 +53,7 @@ public class ScenesManager : MonoBehaviour
         loadingCanvas.SetActive(false);
     }
 
+    // gradually fill up progress bar
     private void Update() 
     {
         progressBar.value = Mathf.MoveTowards(progressBar.value, _target, 3 * Time.deltaTime);

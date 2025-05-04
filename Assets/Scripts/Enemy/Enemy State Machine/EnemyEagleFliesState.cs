@@ -1,23 +1,13 @@
-using System.Collections.Generic;
 using DG.Tweening;
 using EZCameraShake;
 using UnityEngine;
 
+/*
+    Handle bullseye target on players, take off of screen, slamming
+*/
+
 public class EnemyEagleFliesState : EnemyBaseState
 {
-    /*
-        use sequence
-        -save/hold current pos
-        -domovey to target transform field
-        -choose random point from sphere
-        -boss has shadow obj child, change pos to selected slam point, then activate
-        -domove to slam point
-        -camera shake
-        -deactivate shadow
-        -domove to original pos
-        -back to patroling
-    */
-
     Vector3 point;
 
     public override void StateEnter(EnemyController enemy)
@@ -28,11 +18,12 @@ public class EnemyEagleFliesState : EnemyBaseState
         EagleFlySeq.Append(enemy.transform.DOMove(enemy.offScreenPosition.position, enemy.takeOffDuration)).SetEase(enemy.takeOffEase);
         
         
-        // select rand point in range to slam to
+        // select rand player as target
         EagleFlySeq.AppendCallback(()=>
         {
-            point = enemy._players[Random.Range(0,2)].transform.position; //choose one of the players as target
+            point = enemy._players[Random.Range(0,2)].transform.position;
             enemy.shadowObject.transform.position = point;
+
             enemy.shadowObject.SetActive(true);
         });
 
@@ -47,8 +38,12 @@ public class EnemyEagleFliesState : EnemyBaseState
         // slam effect
         EagleFlySeq.AppendCallback(()=>
         {
-            //enemy.shadowObject.SetActive(false);
             CameraShaker.Instance.ShakeOnce(enemy.magn, enemy.rough, enemy.fadeIn, enemy.fadeOut);
+        });
+
+        EagleFlySeq.AppendCallback(()=>
+        {
+            enemy.shadowObject.SetActive(false);
         });
 
         EagleFlySeq.AppendInterval(1f);
@@ -59,8 +54,7 @@ public class EnemyEagleFliesState : EnemyBaseState
         // back to patroling
         EagleFlySeq.AppendCallback(()=>
         {
-            Debug.Log("eagle done");
-            enemy.SwitchState(enemy.patrolState);
+            enemy.SwitchState(enemy.attackPattern[Random.Range(0, enemy.attackPattern.Count)]);
         });
     }
 

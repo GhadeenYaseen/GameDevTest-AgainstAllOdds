@@ -1,29 +1,29 @@
 using UnityEngine;
 
+/*
+    handle bullet shooting and reseting and impact for both explode-able and pickable rockets
+*/
+
 public class Bullet : MonoBehaviour, IAmmo
 {
     [SerializeField] private bool isRocket = false;
-    
     [SerializeField] private Vector3 direction = new Vector3(0,0,-1);
-
-    private bool _aquiredByPlayer=false;
     private Vector3 _velocity;
+    
+    private bool _aquiredByPlayer=false;
     
     public GameObject bullet, target;
     public float speed, rocketSpeed;
 
-    [HideInInspector] public Vector3 ogPos;
+    [HideInInspector] public Vector3 ogPosision;
 
     void Update()
     {
-        //if rocket and is thrown dont move towards
-        if(!_aquiredByPlayer && !isRocket)
+        //is pickable? move forward with no target / is explodeable? move towards player
+        if(!isRocket)
             bullet.transform.position = Vector3.MoveTowards(bullet.transform.position, target.transform.position, speed);
-    
-        if(isRocket)
-        {
+        else
             _velocity = direction * rocketSpeed;
-        }
     }
 
     private void FixedUpdate() 
@@ -42,13 +42,8 @@ public class Bullet : MonoBehaviour, IAmmo
     {
         OnImpact(collision);
     }
-    
-    //play smoke particle? sound?
-    public void OnFire()
-    {
 
-    }
-
+    // what to do on any imact for both types
     public void OnImpact(Collision collision)
     {
         if(!isRocket)
@@ -56,8 +51,16 @@ public class Bullet : MonoBehaviour, IAmmo
             if(collision.gameObject.CompareTag("Player") )
             {
                 bullet.SetActive(false);
-                // play explosion particle
-                // deal damage
+
+                try
+                {
+                    collision.gameObject.GetComponent<Health>().TakeDamage(collision.gameObject);
+                }
+                catch (System.Exception)
+                {
+                    
+                    throw;
+                }
             }
             else
             {
@@ -71,15 +74,16 @@ public class Bullet : MonoBehaviour, IAmmo
         }
     }
 
+    // reset
     public void OnRelod()
     {
-        if(ogPos != null)
-            transform.position = ogPos;
+        if(ogPosision != null)
+            transform.position = ogPosision;
 
         _aquiredByPlayer = false;
     }
 
-    //if is rocket and collision player inventory slot is full, dont disable
+    // disabling for pickable is handled in inventory class
     private void OnDisable() 
     {
         if(!isRocket)

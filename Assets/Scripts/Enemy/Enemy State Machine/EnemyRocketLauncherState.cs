@@ -1,28 +1,27 @@
 using DG.Tweening;
 using UnityEngine;
 
+/*
+
+*/
+
 public class EnemyRocketLauncherState : EnemyBaseState
 {
-    /*
-        onstate enter:
-        -enable two bulls eye images
-        -append interval 2 seconds
-        -remove from parent
-        -set active true three rockets
-    */
-
     public override void StateEnter(EnemyController enemy)
     {
         Sequence launcherSeq = DOTween.Sequence();
 
+        // display bullseyes within players
         launcherSeq.AppendCallback(()=>
         {
             enemy.bullsEye1.SetActive(true);
             enemy.bullsEye2.SetActive(true);
         });
         
+        // follow for a while
         launcherSeq.AppendInterval(2f);
 
+        // lock target
         launcherSeq.AppendCallback(()=>
         {
             enemy.bullsEye1.transform.parent = null;
@@ -43,7 +42,7 @@ public class EnemyRocketLauncherState : EnemyBaseState
 
         launcherSeq.AppendInterval(2f);
 
-        // reset
+        // reset bullseyes and guns
         launcherSeq.AppendCallback(()=>
         {
             enemy.bullsEye1.transform.parent = enemy._players[0].transform;
@@ -63,7 +62,7 @@ public class EnemyRocketLauncherState : EnemyBaseState
 
         launcherSeq.AppendCallback(()=>
         {
-            enemy.SwitchState(enemy.flameThrowerState);
+            enemy.SwitchState(enemy.attackPattern[Random.Range(0, enemy.attackPattern.Count)]);
         });
     }
 

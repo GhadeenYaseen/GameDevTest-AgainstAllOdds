@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+    manage player picking throwable rocket, currently allows one slot to increase difficulty and playtime.
+    might consider adding a max slots number and allow rocket stacking.
+*/
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private Transform holdPosition;
+    [SerializeField] private Transform holdPosition; //slot position
     private bool _isSlotFull = false;
-    
-
-    public void ID()
-    {
-        Debug.Log("tis inventory belongs to his majesty: " + gameObject.name);
-    }
 
     public bool SlotFull()
     {
@@ -22,6 +19,7 @@ public class Inventory : MonoBehaviour
     {
         _isSlotFull = state;
     }
+    
 
     public Transform HoldPosition()
     {

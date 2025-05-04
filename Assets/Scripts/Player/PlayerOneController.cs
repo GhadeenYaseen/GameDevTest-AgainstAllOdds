@@ -1,6 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+    using new input system with unity's character controller for this player only, as after implementation was finished, it was discovered unity doesn't support
+        more than one player on the same device (source: https://discussions.unity.com/t/multiple-players-on-keyboard-new-input-system/754028)
+
+    so the other player uses the a different system
+
+    this is the WASD player
+
+    NO CONSOLE support as i don't have one to test with :(((((
+*/
+
 public class PlayerOneController : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 2.0f;
@@ -9,7 +20,7 @@ public class PlayerOneController : MonoBehaviour
 
     private CharacterController _controller;
     private Vector3 _playerVelocity;
-    private bool groundedPlayer;
+    private bool _groundedPlayer;
 
     private Vector2 _movementInput = Vector2.zero;
     private bool _jumped = false;
@@ -32,15 +43,15 @@ public class PlayerOneController : MonoBehaviour
 
     void Update()
     {
-        groundedPlayer = _controller.isGrounded;
-        if (groundedPlayer && _playerVelocity.y < 0)
+        _groundedPlayer = _controller.isGrounded;
+        if (_groundedPlayer && _playerVelocity.y < 0)
         {
             _playerVelocity.y = 0f;
         }
 
         // Horizontal input
         Vector3 move = new Vector3(_movementInput.x, 0, _movementInput.y);
-        move = Vector3.ClampMagnitude(move, 1f); // Optional: prevents faster diagonal movement
+        move = Vector3.ClampMagnitude(move, 1f);
 
         // facing/rotation with move dir
         if (move != Vector3.zero)
@@ -49,7 +60,7 @@ public class PlayerOneController : MonoBehaviour
         }
 
         // Jump
-        if (_jumped && groundedPlayer)
+        if (_jumped && _groundedPlayer)
         {
             _playerVelocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
@@ -60,5 +71,21 @@ public class PlayerOneController : MonoBehaviour
         // Combine horizontal and vertical movement
         Vector3 finalMove = (move * playerSpeed) + (_playerVelocity.y * Vector3.up);
         _controller.Move(finalMove * Time.deltaTime);
+    }
+
+     void OnTriggerEnter(Collider other) 
+     {
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            try
+            {
+                gameObject.GetComponent<Health>().TakeDamage(gameObject);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

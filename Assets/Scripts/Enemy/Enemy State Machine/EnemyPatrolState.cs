@@ -1,6 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
 
+/*
+    Patrol in a sinwave motion using dotween
+*/
+
 public class EnemyPatrolState : EnemyBaseState
 {
     float patrolCycleLength;
@@ -10,12 +14,10 @@ public class EnemyPatrolState : EnemyBaseState
     {
         patrolCycleLength = enemy.patrolCycleLength;
 
-        Debug.Log("on start patrol");
         DOTween.Restart("enemy"); 
         
         // Get the target position
         targetPosition = enemy.destination.position;
-        
 
         // move towards X linearly
         enemy.gameObject.transform.DOMoveX(targetPosition.x, enemy.moveDuration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetId("enemy");
@@ -38,8 +40,7 @@ public class EnemyPatrolState : EnemyBaseState
         if(patrolCycleLength < 0) 
         { 
             DOTween.Pause("enemy");
-            //targetPosition.x *=-1;
-            enemy.SwitchState(enemy.rocketLauncherState);
+            enemy.SwitchState(enemy.attackPattern[Random.Range(0, enemy.attackPattern.Count)]);
         } 
     }
     

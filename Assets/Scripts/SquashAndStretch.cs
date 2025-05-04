@@ -2,6 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+/*
+    script from github to add effects on ui or 3d models
+    source: https://github.com/Maraakis/ChristinaCreatesGames/blob/main/Squash%20and%20Stretch%20Animation%20with%20Code/SquashAndStretch.cs
+*/
+
 namespace ChristinaCreatesGames.Animations
 {
     public class SquashAndStretch : MonoBehaviour

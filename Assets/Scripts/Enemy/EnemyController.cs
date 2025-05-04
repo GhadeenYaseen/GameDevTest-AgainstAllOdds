@@ -1,13 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+
+/*
+    Class houses attack configs and state handling for enemy behavior
+*/
 
 public class EnemyController : MonoBehaviour
 {
     /*in future, replace attack settings w scriptable objects for more زلّامي code*/
 
-    [Header("Patrol Movement Config")] /*pause patrol and resume by using -> DoTween.Pause("enemy"); .Play("enemy"); */
+#region Attack Configs
+    [Header("Patrol Movement Config")] 
     public Transform destination;
     public Transform startPos;
     public float moveDuration = 5f;
@@ -16,8 +20,10 @@ public class EnemyController : MonoBehaviour
     public float patrolCycleLength = 6f;
     [HideInInspector] public Vector3 _startPosition;
 
+
     [Header("Flame Thrower Attack Config")] /*warm up effect could be -> inc light power from heart of enemy*/
     public ParticleSystem flameBeamParticle;
+
 
     [Header("Eagle Flies Attack Config")]
     public Transform offScreenPosition;
@@ -33,14 +39,12 @@ public class EnemyController : MonoBehaviour
     public float fadeIn;
     public float fadeOut;
 
-    [Header("Rocket Launcher Attack Config")]
 
+    [Header("Rocket Launcher Attack Config")]
     public List<Transform> rocketLaunchPositions = new List<Transform>();
-    //public Transform launchPos1; // boom rocket1
-    //public Transform launchPos2; //pickable rocket
-    //public Transform launchPos3; // boom rocket2
     public GameObject bullsEye1, bullsEye2;
 
+#endregion
 
     EnemyBaseState currentState;
 
@@ -48,11 +52,9 @@ public class EnemyController : MonoBehaviour
     public EnemyFlameThrowerState flameThrowerState = new EnemyFlameThrowerState();
     public EnemyRocketLauncherState rocketLauncherState = new EnemyRocketLauncherState();
     public EnemyPatrolState patrolState = new EnemyPatrolState();
-    public EnemyHurtState hurtState = new EnemyHurtState();
 
+    [HideInInspector] public List<EnemyBaseState> attackPattern = new List<EnemyBaseState>(); // choose state randomely for random patterns
     [HideInInspector] public GameObject[] _players;
-    private List<EnemyBaseState> attackPattern = new List<EnemyBaseState>();
-
     [HideInInspector] public Vector3 _ogPositionBullseye1, _ogPositionBullseye2;
 
     private void Awake()
@@ -75,12 +77,9 @@ public class EnemyController : MonoBehaviour
     private void InitAttackPattern()
     {
         attackPattern.Add(patrolState);
+        
         attackPattern.Add(flameThrowerState);
-
-        attackPattern.Add(patrolState);
         attackPattern.Add(rocketLauncherState);
-
-        attackPattern.Add(patrolState);
         attackPattern.Add(eagleFliesState);
     }
 

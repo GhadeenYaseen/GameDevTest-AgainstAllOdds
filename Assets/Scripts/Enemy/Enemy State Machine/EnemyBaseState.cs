@@ -1,4 +1,6 @@
-using UnityEngine;
+/*
+    Base class for all enemy states
+*/
 
 public abstract class EnemyBaseState
 {

@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+    interface for projectiles
+*/
 
 public interface IAmmo 
 {
     void OnRelod();
-    void OnFire();
+    
     void OnImpact(Collision collision);
 }

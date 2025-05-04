@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1195110515969652989}
   m_Layer: 0
   m_Name: Pickable rocket
-  m_TagString: Untagged
+  m_TagString: Rocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,8 +90,8 @@ MonoBehaviour:
   bullet: {fileID: 7208127953145965919}
   target: {fileID: 0}
   speed: 0.1
-  rocketSpeed: 10
-  ogPos: {x: 0, y: 0, z: 0}
+  rocketSpeed: 6
+  ogPosision: {x: 0, y: 0, z: 0}
 --- !u!54 &1195110515969652989
 Rigidbody:
   m_ObjectHideFlags: 0
