@@ -54,6 +54,8 @@ public class Health : MonoBehaviour
                 gameObject.SetActive(false);
                 GameManager.gameManagerInstance.UpdatePlayers();
             }
+
+            
         }
     }
 }

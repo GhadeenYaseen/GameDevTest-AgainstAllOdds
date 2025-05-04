@@ -67,6 +67,7 @@ public class Rocket : MonoBehaviour, IPickable
             try
             {
                 Debug.Log("enemy shot");
+                ScoreManager.scoreManagerInstance.UpdateScore();
                 other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
             }
             catch (System.Exception)
@@ -106,6 +107,8 @@ public class Rocket : MonoBehaviour, IPickable
         gameObject.transform.parent = _holdPosition;
 
         _rocketCollider.enabled = false;
+
+        ScoreManager.scoreManagerInstance.UpdateScore();
     }
 
     public void Throw()
