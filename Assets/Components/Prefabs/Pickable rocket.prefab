@@ -51,7 +51,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96aebc99290b3c448b6503973b9899f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPower: 3
-  lifeCycleDuration: 2
+  throwPower: 4
+  lifeCycleDuration: 3
 --- !u!114 &7269626096909758923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,11 +86,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRocket: 1
-  direction: {x: 0, y: -0.2, z: -1}
+  direction: {x: 0, y: -0.3, z: -1}
   bullet: {fileID: 7208127953145965919}
   target: {fileID: 0}
   speed: 0.1
-  rocketSpeed: 6
+  rocketSpeed: 5
   ogPosision: {x: 0, y: 0, z: 0}
 --- !u!54 &1195110515969652989
 Rigidbody:

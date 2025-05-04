@@ -36,6 +36,7 @@ public class Gun : MonoBehaviour
     {
         foreach (GameObject bullet in bullets)
         {
+            bullet.GetComponent<Bullet>().ogPosision = transform.position;
             bullet.SetActive(true);
         }
     }

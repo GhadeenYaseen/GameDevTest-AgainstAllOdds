@@ -43,6 +43,7 @@ public class EnemyController : MonoBehaviour
     [Header("Rocket Launcher Attack Config")]
     public List<Transform> rocketLaunchPositions = new List<Transform>();
     public GameObject bullsEye1, bullsEye2;
+    public List<GameObject> _players;
 
 #endregion
 
@@ -54,16 +55,17 @@ public class EnemyController : MonoBehaviour
     public EnemyPatrolState patrolState = new EnemyPatrolState();
 
     [HideInInspector] public List<EnemyBaseState> attackPattern = new List<EnemyBaseState>(); // choose state randomely for random patterns
-    [HideInInspector] public GameObject[] _players;
+    
     [HideInInspector] public Vector3 _ogPositionBullseye1, _ogPositionBullseye2;
 
     private void Awake()
     {
         _startPosition = startPos.position;
-        _players = GameObject.FindGameObjectsWithTag("Player");
 
         _ogPositionBullseye1 = bullsEye1.transform.localPosition;
         _ogPositionBullseye2 = bullsEye2.transform.localPosition;
+
+        Debug.Log("enem ctrlr: ogbulls1 pos-> " + _ogPositionBullseye1 + " ogbulls2 pos-> " + _ogPositionBullseye2);
 
         InitAttackPattern();
     }

@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour, IAmmo
     {
         if(!isRocket)
         {
-            if(collision.gameObject.CompareTag("Player") )
+            if(collision.gameObject.CompareTag("Player") && collision.gameObject.activeSelf)
             {
                 bullet.SetActive(false);
 
@@ -62,10 +62,18 @@ public class Bullet : MonoBehaviour, IAmmo
                     throw;
                 }
             }
-            else
+            else if(collision.gameObject.CompareTag("Enemy") && collision.gameObject.activeSelf)
             {
                 bullet.SetActive(false);
-                // play explosion particle
+                
+                try
+                {
+                    collision.gameObject.GetComponent<Health>().TakeDamage(collision.gameObject);
+                }
+                catch (System.Exception)
+                {
+                    throw;
+                }
             }
         }
         else

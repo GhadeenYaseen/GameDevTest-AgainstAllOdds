@@ -39,14 +39,47 @@ public class Rocket : MonoBehaviour, IPickable
 
     private void Update() 
     {
-        if(Input.GetButtonDown("Fire1") && _playerInventory.SlotFull() == true && _currentPlayer !=null)
+        if(Input.GetButtonDown("Fire1") /*&& _playerInventory.SlotFull() == true*/ && _currentPlayer !=null)
         {
             Throw();
         }
     }
 
     // if rocket is encountered and inventory is empty, equip
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            VerifyInventory(other.gameObject);
+            Debug.Log("picked rocket");
+
+            if(_playerInventory.SlotFull() == false)
+            {
+                _playerInventory.SetSlotState(true);
+                PickUp();
+            }
+            else
+            {
+                Debug.Log("u already have rocket, throw it first");
+            }
+        }
+        else if(other.gameObject.CompareTag("Enemy") && other.gameObject.activeSelf)
+        {
+            try
+            {
+                Debug.Log("enemy has been hit by rocket");
+                ScoreManager.scoreManagerInstance.UpdateScore();
+                other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
+            }
+            catch (System.Exception)
+            {
+                    
+                throw;
+            }
+        }    
+    }
+    
+    /*(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
@@ -62,11 +95,11 @@ public class Rocket : MonoBehaviour, IPickable
                 Debug.Log("u already have rocket, throw it first");
             }
         }
-        else if(other.gameObject.CompareTag("Enemy"))
+        else if(other.gameObject.CompareTag("Enemy") && other.gameObject.activeSelf)
         {
             try
             {
-                Debug.Log("enemy shot");
+                Debug.Log("enemy has been hit by rocket");
                 ScoreManager.scoreManagerInstance.UpdateScore();
                 other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
             }
@@ -76,7 +109,7 @@ public class Rocket : MonoBehaviour, IPickable
                 throw;
             }
         }
-    }
+    }*/
 
     public void VerifyInventory(GameObject gameObject)
     {

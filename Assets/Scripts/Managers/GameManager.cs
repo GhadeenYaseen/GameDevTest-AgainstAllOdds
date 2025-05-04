@@ -49,9 +49,10 @@ public class GameManager : MonoBehaviour
         {
             LoseState();
         }
-
-        Time.timeScale = 0;
+        
         DOTween.KillAll();
+        Time.timeScale = 0;
+        
     }
 
     public void UpdatePlayers()

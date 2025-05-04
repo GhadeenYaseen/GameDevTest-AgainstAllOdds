@@ -23,8 +23,6 @@ public class Health : MonoBehaviour
         {
             _currentHealth = 3;
         }
-        
-        Debug.Log("health: " + _currentHealth);
 
         if(hurtAudioSource != null)
         {
@@ -35,10 +33,18 @@ public class Health : MonoBehaviour
     public void TakeDamage(GameObject gameObject)
     {
         _currentHealth --;
+        Debug.Log("damaged guy: " + gameObject.name);
 
         hurtAudioSource.PlayOneShot(hurtAudioSource.clip);
 
-        ui_Hearts[_currentHealth].gameObject.SetActive(false);
+        try
+        {
+            ui_Hearts[_currentHealth].gameObject.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("u r dead");
+        }
 
         if(_currentHealth <= 0 )
         {

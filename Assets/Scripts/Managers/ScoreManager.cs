@@ -19,6 +19,15 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore.text ="";
         _currentScore = 0;
+
+        if(scoreManagerInstance != null && scoreManagerInstance != this)
+        {   
+            Destroy(gameObject);
+        }
+        else
+        {
+            scoreManagerInstance = this;
+        }
     }
 
     public void UpdateScore()
