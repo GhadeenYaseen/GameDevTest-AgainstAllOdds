@@ -18,6 +18,8 @@ Players lose the fight if both lose all their lives.
 Players can have as many rematches as possible, to score the highest score they can.
 
 ### How To Play
+-------------- Disclaimer: No controller support, only split keyboard :0 ---------------------
+
 Movement: player1 via WASD , player2 via arrow keys and numpad arrows. 
 Jumping: player1 via left shift, player2 via space bar. 
 Throw pickable rocket: both players share the shoot button, the zero number (not numpad). 
