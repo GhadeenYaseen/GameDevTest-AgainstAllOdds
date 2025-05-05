@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 403985374}
   - component: {fileID: 403985375}
   - component: {fileID: 403985376}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1158,7 +1158,7 @@ GameObject:
   - component: {fileID: 408833393}
   - component: {fileID: 408833392}
   - component: {fileID: 408833391}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1984,7 +1984,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3912,7 +3912,7 @@ GameObject:
   - component: {fileID: 1024144645}
   - component: {fileID: 1024144646}
   - component: {fileID: 1024144647}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6572,7 +6572,7 @@ GameObject:
   - component: {fileID: 1843703657}
   - component: {fileID: 1843703656}
   - component: {fileID: 1843703655}
-  m_Layer: 6
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7501,8 +7501,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
