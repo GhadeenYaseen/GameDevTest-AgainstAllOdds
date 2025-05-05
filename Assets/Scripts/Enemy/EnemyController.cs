@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 
 /*
-    Class houses attack configs and state handling for enemy behavior
+    Class contains attack configs and state handling for enemy behavior, as well as interacting with dmage
 */
 
 public class EnemyController : MonoBehaviour
@@ -98,10 +98,8 @@ public class EnemyController : MonoBehaviour
     {
         if(other.CompareTag("Rocket"))
         {
-            Debug.Log("grah has been hit by rocket");
-            
             ScoreManager.scoreManagerInstance.UpdateScore();
-            GetComponent<Health>().TakeDamage(this.gameObject);
+            GetComponent<Health>().TakeDamage(gameObject);
         }
     }
 }

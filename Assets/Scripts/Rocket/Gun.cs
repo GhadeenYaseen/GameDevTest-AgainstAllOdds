@@ -41,7 +41,8 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
         bullets[0].GetComponent<Bullet>().ogPosision = transform.position;
     }
 }

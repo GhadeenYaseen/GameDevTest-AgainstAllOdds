@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+/*
+    define data to save here
+*/
 
 [System.Serializable]
 public class GameData

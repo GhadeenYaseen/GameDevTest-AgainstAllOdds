@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using UnityEngine.UI;
 using System.Threading.Tasks;
 
@@ -21,7 +20,7 @@ public class ScenesManager : MonoBehaviour
     {
         if (ScenesManagerInstance != null && ScenesManagerInstance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {

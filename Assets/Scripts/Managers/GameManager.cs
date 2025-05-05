@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+/*
+    handle winning and losing 
+*/
+
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager gameManagerInstance {get; private set;}
@@ -51,7 +55,6 @@ public class GameManager : MonoBehaviour
         
         DOTween.KillAll();
         Time.timeScale = 0;
-        
     }
 
     public void UpdatePlayers()

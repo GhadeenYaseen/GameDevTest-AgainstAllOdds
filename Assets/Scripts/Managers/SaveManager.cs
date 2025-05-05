@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.IO; 
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.SocialPlatforms.Impl;
+
+/*
+    save and load game data via a binary formatter for security and privacy
+*/
 
 public static class SaveManager
 {

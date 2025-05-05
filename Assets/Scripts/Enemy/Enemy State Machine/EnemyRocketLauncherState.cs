@@ -11,7 +11,7 @@ public class EnemyRocketLauncherState : EnemyBaseState
     {
         Sequence launcherSeq = DOTween.Sequence();
 
-        // display bullseyes within players
+        // reset, then display bullseyes within players
         launcherSeq.AppendCallback(()=>
         {
             enemy.bullsEye1.transform.parent = enemy._players[0].transform;

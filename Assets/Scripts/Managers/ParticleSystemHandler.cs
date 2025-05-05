@@ -1,6 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+    handle fire beam particle collision, timer to prevent every single particle from damaging the player and killing them instantly
+*/
 
 public class ParticleSystemHandler : MonoBehaviour
 {

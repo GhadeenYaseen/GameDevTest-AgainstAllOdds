@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+
+/*
+    handle score updation, and saving and loading
+*/
 
 public class ScoreManager : MonoBehaviour
 {

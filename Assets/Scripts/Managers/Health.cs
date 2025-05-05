@@ -1,7 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/*
+    main health system, deal with damage and death and its ui
+*/
 
 public class Health : MonoBehaviour
 {
@@ -33,7 +36,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(GameObject gameObject)
     {
         _currentHealth --;
-        Debug.Log("damaged guy: " + gameObject.name);
 
         hurtAudioSource.PlayOneShot(hurtAudioSource.clip);
 
@@ -60,8 +62,6 @@ public class Health : MonoBehaviour
                 gameObject.SetActive(false);
                 GameManager.gameManagerInstance.UpdatePlayers();
             }
-
-            
         }
     }
 }
