@@ -93,4 +93,15 @@ public class EnemyController : MonoBehaviour
     {
         currentState.StateUpdate(this);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Rocket"))
+        {
+            Debug.Log("grah has been hit by rocket");
+            
+            ScoreManager.scoreManagerInstance.UpdateScore();
+            GetComponent<Health>().TakeDamage(this.gameObject);
+        }
+    }
 }

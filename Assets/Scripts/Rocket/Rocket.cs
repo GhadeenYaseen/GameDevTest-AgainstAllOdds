@@ -62,20 +62,7 @@ public class Rocket : MonoBehaviour, IPickable
             {
                 Debug.Log("u already have rocket, throw it first");
             }
-        }
-        else if(other.gameObject.CompareTag("Enemy") && other.gameObject.activeSelf)
-        {
-            try
-            {
-                Debug.Log("enemy has been hit by rocket");
-                ScoreManager.scoreManagerInstance.UpdateScore();
-                other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
-            }
-            catch (System.Exception)
-            {  
-                throw;
-            }
-        }    
+        }   
     }
 
     public void VerifyInventory(GameObject gameObject)

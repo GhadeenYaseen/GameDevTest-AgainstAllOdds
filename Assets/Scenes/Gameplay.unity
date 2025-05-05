@@ -2375,14 +2375,14 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 96
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.595013, y: 1.8880378, z: 1.685687}
-  m_Center: {x: -0.046026804, y: -0.08026452, z: -0.55787116}
+  m_Size: {x: 3.1980317, y: 1.7387979, z: 1.685687}
+  m_Center: {x: 0.04777803, y: -0.15488502, z: -0.55787116}
 --- !u!4 &733992613
 Transform:
   m_ObjectHideFlags: 0
@@ -6921,7 +6921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScore: {fileID: 577617008}
-  highScore: {fileID: 772932290}
+  highScore: {fileID: 1491661730}
   leaderBoard: {fileID: 0}
   amount: 10
   _currentScore: 0
