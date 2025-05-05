@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8327998499944198012}
   - component: {fileID: 7269626096909758923}
   - component: {fileID: 1195110515969652989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pickable rocket
   m_TagString: Rocket
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96aebc99290b3c448b6503973b9899f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPower: 4
-  lifeCycleDuration: 3
+  throwPower: 16
+  lifeCycleDuration: 2
 --- !u!114 &7269626096909758923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRocket: 1
-  direction: {x: 0, y: -0.3, z: -1}
+  direction: {x: 0, y: -0.42, z: -1}
   bullet: {fileID: 7208127953145965919}
   target: {fileID: 0}
   speed: 0.1
@@ -197,11 +197,31 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8617423122824472121, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7219946919392045747, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6259321352784638961, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -4463342021665388759, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a8084bdfd5aa59348b523e0790f508f3, type: 2}
+    - target: {fileID: -3669115712044563885, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -2740595164963253604, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,10 +237,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.0912
       objectReference: {fileID: 0}
+    - target: {fileID: -12165542998051489, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 162b83a60df2d3942b650ebc30122ac0,
         type: 3}
       propertyPath: m_Name
       value: rocket_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2080287528825282134, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491034721352858763, guid: 162b83a60df2d3942b650ebc30122ac0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

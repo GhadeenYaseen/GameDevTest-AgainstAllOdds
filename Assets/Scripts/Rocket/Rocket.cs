@@ -34,12 +34,12 @@ public class Rocket : MonoBehaviour, IPickable
     private void Awake() 
     {
         _rocketCollider = GetComponent<CapsuleCollider>();
-        _enemyLaunchPoint = gameObject.transform.parent.transform;
+        _enemyLaunchPoint = gameObject.transform.parent;
     }
 
     private void Update() 
     {
-        if(Input.GetButtonDown("Fire1") /*&& _playerInventory.SlotFull() == true*/ && _currentPlayer !=null)
+        if(Input.GetButtonDown("Fire1") && _currentPlayer !=null)
         {
             Throw();
         }
@@ -72,44 +72,11 @@ public class Rocket : MonoBehaviour, IPickable
                 other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
             }
             catch (System.Exception)
-            {
-                    
+            {  
                 throw;
             }
         }    
     }
-    
-    /*(Collider other)
-    {
-        if(other.gameObject.CompareTag("Player"))
-        {
-            VerifyInventory(other.gameObject);
-
-            if(_playerInventory.SlotFull() == false)
-            {
-                _playerInventory.SetSlotState(true);
-                PickUp();
-            }
-            else
-            {
-                Debug.Log("u already have rocket, throw it first");
-            }
-        }
-        else if(other.gameObject.CompareTag("Enemy") && other.gameObject.activeSelf)
-        {
-            try
-            {
-                Debug.Log("enemy has been hit by rocket");
-                ScoreManager.scoreManagerInstance.UpdateScore();
-                other.gameObject.GetComponent<Health>().TakeDamage(other.gameObject);
-            }
-            catch (System.Exception)
-            {
-                    
-                throw;
-            }
-        }
-    }*/
 
     public void VerifyInventory(GameObject gameObject)
     {
@@ -134,13 +101,11 @@ public class Rocket : MonoBehaviour, IPickable
     {
         //get transform of holding point from player, assign that to rocket
         _holdPosition = _playerInventory.HoldPosition();
-        Debug.Log("hold pos:" + _holdPosition);
 
         gameObject.transform.position = _holdPosition.position;
         gameObject.transform.parent = _holdPosition;
-
+        
         _rocketCollider.enabled = false;
-
         ScoreManager.scoreManagerInstance.UpdateScore();
     }
 
@@ -151,11 +116,8 @@ public class Rocket : MonoBehaviour, IPickable
         Vector3 throwDirection =  _currentPlayer.transform.forward;
         gameObject.transform.DOMove(throwDirection * throwPower, lifeCycleDuration).SetEase(Ease.OutExpo).OnComplete(
             ()=> {
-                    gameObject.transform.parent = null;
-                    _playerInventory.SetSlotState(false);
-                    _rocketCollider.enabled = true;
-                }
-        );
+                    OnRelod();
+                 });
     }
 
     // reset
@@ -168,5 +130,10 @@ public class Rocket : MonoBehaviour, IPickable
             _playerInventory.SetSlotState(false);
         
         _rocketCollider.enabled = true;
+    }
+
+    private void OnDisable() 
+    {
+        OnRelod();
     }
 }

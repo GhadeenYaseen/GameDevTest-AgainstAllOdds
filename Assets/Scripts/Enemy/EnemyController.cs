@@ -65,8 +65,6 @@ public class EnemyController : MonoBehaviour
         _ogPositionBullseye1 = bullsEye1.transform.localPosition;
         _ogPositionBullseye2 = bullsEye2.transform.localPosition;
 
-        Debug.Log("enem ctrlr: ogbulls1 pos-> " + _ogPositionBullseye1 + " ogbulls2 pos-> " + _ogPositionBullseye2);
-
         InitAttackPattern();
     }
 

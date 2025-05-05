@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour, IAmmo
 
     private void FixedUpdate() 
     {
-        if(isRocket)
+        if(isRocket && !_aquiredByPlayer)
         {
             Vector3 pos = transform.position;
 
@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour, IAmmo
             else if(collision.gameObject.CompareTag("Enemy") && collision.gameObject.activeSelf)
             {
                 bullet.SetActive(false);
-                
+
                 try
                 {
                     collision.gameObject.GetComponent<Health>().TakeDamage(collision.gameObject);
@@ -94,6 +94,8 @@ public class Bullet : MonoBehaviour, IAmmo
     // disabling for pickable is handled in inventory class
     private void OnDisable() 
     {
+        _aquiredByPlayer = false;
+        
         if(!isRocket)
             OnRelod();
     }
