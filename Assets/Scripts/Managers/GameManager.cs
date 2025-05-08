@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
         
         DOTween.KillAll();
+        ScoreManager.scoreManagerInstance.SaveScore();
         Time.timeScale = 0;
     }
 

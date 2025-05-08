@@ -12,7 +12,7 @@ public static class SaveManager
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = Application.persistentDataPath + "/AgainstAllOdds/HighScore.sb";
+        string path = Application.persistentDataPath + "/HighScore.sb";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -24,7 +24,7 @@ public static class SaveManager
 
     public static GameData LoadGameData()
     {
-        string path = Application.persistentDataPath + "/AgainstAllOdds/HighScore.sb";
+        string path = Application.persistentDataPath + "/HighScore.sb";
     
         if(File.Exists(path))
         {

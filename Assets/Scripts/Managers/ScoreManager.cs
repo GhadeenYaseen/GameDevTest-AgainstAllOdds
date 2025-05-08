@@ -11,16 +11,15 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI highScore;
-    [SerializeField] private TextMeshProUGUI leaderBoard;
+    //[SerializeField] private TextMeshProUGUI leaderBoard;
 
     [SerializeField] private int amount;
 
-    [HideInInspector] public int _currentScore, _highScore;
+    [HideInInspector] public int _currentScore=0, _highScore=0;
 
     private void Awake() 
     {
-        currentScore.text ="";
-        _currentScore = 0;
+        if(currentScore != null) currentScore.text ="";
 
         if(scoreManagerInstance != null && scoreManagerInstance != this)
         {   
@@ -36,12 +35,11 @@ public class ScoreManager : MonoBehaviour
     {
         _currentScore += amount;
 
-        currentScore.text = "Score" + _currentScore.ToString();
+        if(currentScore != null) currentScore.text = "Score" + _currentScore.ToString();
         
         if(_highScore < _currentScore)
         {
             _highScore = _currentScore;
-            highScore.text=_highScore.ToString();
         }
     }
 
@@ -49,6 +47,7 @@ public class ScoreManager : MonoBehaviour
     public void SaveScore()
     {
         SaveManager.SaveScore(this);
+        LoadScore();
     }
 
     // on button click
@@ -56,6 +55,6 @@ public class ScoreManager : MonoBehaviour
     {
         GameData data = SaveManager.LoadGameData();
 
-        _highScore = data.highScore;
+        if(highScore != null) highScore.text =data.highScore.ToString();
     }
 }
