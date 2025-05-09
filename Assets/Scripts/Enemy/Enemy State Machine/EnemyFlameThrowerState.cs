@@ -8,8 +8,12 @@ public class EnemyFlameThrowerState : EnemyBaseState
 {
     public override void StateEnter(EnemyController enemy)
     {
-        enemy.flameBeamParticle.Play();
-        SoundManager.PlaySound(SoundType.Fire);
+        if(! GameManager.gameManagerInstance.isGameOver)
+        {
+            enemy.flameBeamParticle.Play();
+            SoundManager.PlaySound(SoundType.Fire);
+        }
+        
     }
 
     public override void StateUpdate(EnemyController enemy)
@@ -17,6 +21,11 @@ public class EnemyFlameThrowerState : EnemyBaseState
         if(enemy.flameBeamParticle.isStopped)
         {
             enemy.SwitchState(enemy.attackPattern[Random.Range(0, enemy.attackPattern.Count)]);
+        }
+
+        if(GameManager.gameManagerInstance.isGameOver)
+        {
+            enemy.gameObject.SetActive(false);
         }
     }
 }

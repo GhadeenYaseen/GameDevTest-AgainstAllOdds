@@ -10,9 +10,6 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private List<Image> ui_Hearts = new List<Image>();
 
-    [SerializeField] private AudioSource hurtAudioSource;
-    [SerializeField] private AudioClip hurtAudioClip;
-
     private int _currentHealth;
     private bool _isWin;
 
@@ -25,11 +22,6 @@ public class Health : MonoBehaviour
         else
         {
             _currentHealth = 3;
-        }
-
-        if(hurtAudioSource != null)
-        {
-            hurtAudioSource.clip = hurtAudioClip;
         }
     }
 
@@ -52,15 +44,20 @@ public class Health : MonoBehaviour
         {
             if(gameObject.CompareTag("Enemy"))
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
                 
                 _isWin = true;
+                
                 GameManager.gameManagerInstance.GameOver(_isWin);
             }
             else if(gameObject.CompareTag("Player"))
             {
                 gameObject.SetActive(false);
+
+                //_isWin = false;
+
                 GameManager.gameManagerInstance.UpdatePlayers();
+                //GameManager.gameManagerInstance.GameOver(_isWin);
             }
         }
     }

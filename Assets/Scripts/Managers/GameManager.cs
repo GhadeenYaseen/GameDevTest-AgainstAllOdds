@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 /*
@@ -18,11 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject bgMusic;
     
     [HideInInspector] public int playersCount;
+    [HideInInspector] public bool isGameOver=false;
 
     private void Awake() 
     {
-        Time.timeScale = 1;
-
         if(gameManagerInstance != null && gameManagerInstance != this)
         {
             Destroy(gameObject);
@@ -35,14 +33,14 @@ public class GameManager : MonoBehaviour
         playersCount = playersList.Count;
     }
 
-    private void OnEnable() 
-    {
-        Time.timeScale = 1;
-    }
-
     public void GameOver(bool isWin)
     {
-        bgMusic.SetActive(false);
+        isGameOver = true;
+        //bgMusic.SetActive(false);
+
+        SecondarySoundManager.secondarySoundManagerInstance.BackgroundSoundPlayer(false);
+        
+        ScoreManager.scoreManagerInstance.SaveScore();
 
         if(isWin)
         {
@@ -52,10 +50,6 @@ public class GameManager : MonoBehaviour
         {
             LoseState();
         }
-        
-        DOTween.KillAll();
-        ScoreManager.scoreManagerInstance.SaveScore();
-        Time.timeScale = 0;
     }
 
     public void UpdatePlayers()
@@ -64,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         if(playersCount <= 0 )
         {
-            LoseState();
+            GameOver(false);
         }
     }
 

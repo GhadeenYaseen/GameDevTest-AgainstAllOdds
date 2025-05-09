@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public static EnemyController enemyController;
     /*in future, replace attack settings w scriptable objects for more زلّامي code*/
 
 #region Attack Configs
@@ -60,6 +61,8 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        enemyController = this;
+
         _startPosition = startPos.position;
 
         _ogPositionBullseye1 = bullsEye1.transform.localPosition;
