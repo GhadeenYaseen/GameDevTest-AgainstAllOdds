@@ -34,6 +34,8 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+        SoundManager.PlaySound(SoundType.Shoot);
+        
         foreach (GameObject bullet in bullets)
         {
             bullet.GetComponent<Bullet>().ogPosision = transform.position;

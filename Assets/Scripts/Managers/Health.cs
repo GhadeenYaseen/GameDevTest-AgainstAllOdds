@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
     {
         _currentHealth --;
 
-        hurtAudioSource.PlayOneShot(hurtAudioSource.clip);
+        SoundManager.PlaySound(SoundType.Hurt);
 
         try
         {

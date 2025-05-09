@@ -39,6 +39,7 @@ public class EnemyEagleFliesState : EnemyBaseState
         EagleFlySeq.AppendCallback(()=>
         {
             CameraShaker.Instance.ShakeOnce(enemy.magn, enemy.rough, enemy.fadeIn, enemy.fadeOut);
+            SoundManager.PlaySound(SoundType.Slam);
         });
 
         EagleFlySeq.AppendCallback(()=>

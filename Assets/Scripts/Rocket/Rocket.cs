@@ -93,6 +93,8 @@ public class Rocket : MonoBehaviour, IPickable
         gameObject.transform.parent = _holdPosition;
         
         _rocketCollider.enabled = false;
+        
+        SoundManager.PlaySound(SoundType.Equip);
         ScoreManager.scoreManagerInstance.UpdateScore();
     }
 

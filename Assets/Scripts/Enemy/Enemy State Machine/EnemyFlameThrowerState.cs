@@ -9,6 +9,7 @@ public class EnemyFlameThrowerState : EnemyBaseState
     public override void StateEnter(EnemyController enemy)
     {
         enemy.flameBeamParticle.Play();
+        SoundManager.PlaySound(SoundType.Fire);
     }
 
     public override void StateUpdate(EnemyController enemy)

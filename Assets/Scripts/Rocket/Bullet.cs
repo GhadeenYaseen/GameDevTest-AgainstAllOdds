@@ -58,7 +58,6 @@ public class Bullet : MonoBehaviour, IAmmo
                 }
                 catch (System.Exception)
                 {
-                    
                     throw;
                 }
             }
@@ -75,6 +74,8 @@ public class Bullet : MonoBehaviour, IAmmo
                     throw;
                 }
             }
+
+            SoundManager.PlaySound(SoundType.Explode);
         }
         else
         {
