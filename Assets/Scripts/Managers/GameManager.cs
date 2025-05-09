@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject bgMusic;
     
-    private int _playersCount;
+    [HideInInspector] public int playersCount;
 
     private void Awake() 
     {
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             gameManagerInstance = this;
         }
 
-        _playersCount = playersList.Count;
+        playersCount = playersList.Count;
     }
 
     private void OnEnable() 
@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayers()
     {
-        _playersCount --;
+        playersCount --;
 
-        if(_playersCount <= 0 )
+        if(playersCount <= 0 )
         {
             LoseState();
         }

@@ -20,8 +20,23 @@ public class EnemyRocketLauncherState : EnemyBaseState
             enemy.bullsEye1.transform.localPosition = enemy._ogPositionBullseye1;
             enemy.bullsEye2.transform.localPosition = enemy._ogPositionBullseye2;
             
-            enemy.bullsEye1.SetActive(true);
-            enemy.bullsEye2.SetActive(true);
+            if(enemy._players[0].activeSelf)
+            {
+                enemy.bullsEye1.transform.parent = enemy._players[0].transform;
+                enemy.bullsEye1.transform.localPosition = enemy._ogPositionBullseye1;
+                enemy.bullsEye1.SetActive(true);
+                
+            }
+            
+            if(enemy._players[1].activeSelf)
+            {
+                enemy.bullsEye2.transform.parent = enemy._players[1].transform;
+                enemy.bullsEye2.transform.localPosition = enemy._ogPositionBullseye2;
+                enemy.bullsEye2.SetActive(true);
+            }
+
+            //enemy.bullsEye1.SetActive(true);
+            //enemy.bullsEye2.SetActive(true);
         });
         
         // follow for a while
@@ -30,8 +45,8 @@ public class EnemyRocketLauncherState : EnemyBaseState
         // lock target
         launcherSeq.AppendCallback(()=>
         {
-            enemy.bullsEye1.transform.parent = null;
-            enemy.bullsEye2.transform.parent = null;
+            if(enemy._players[0].activeSelf) enemy.bullsEye1.transform.parent = null;
+            if(enemy._players[1].activeSelf) enemy.bullsEye2.transform.parent = null;
         });
 
         launcherSeq.AppendInterval(1f);
@@ -39,13 +54,19 @@ public class EnemyRocketLauncherState : EnemyBaseState
         //shoot here
         launcherSeq.AppendCallback(()=>
         {
-            foreach (Transform gun in enemy.rocketLaunchPositions)
+            for(int i =0 ; i< GameManager.gameManagerInstance.playersCount ; i++) 
             {
-                gun.gameObject.SetActive(true);
+                enemy.rocketLaunchPositions[i].gameObject.SetActive(true);
             }
             
-            enemy.bullsEye1.SetActive(false);
-            enemy.bullsEye2.SetActive(false);
+            enemy.rocketLaunchPositions[2].gameObject.SetActive(true);
+            /*foreach (Transform gun in enemy.rocketLaunchPositions)
+            {
+                gun.gameObject.SetActive(true);
+            }*/
+            
+            if(enemy._players[0].activeSelf) enemy.bullsEye1.SetActive(false);
+            if(enemy._players[1].activeSelf) enemy.bullsEye2.SetActive(false);
         });
 
         launcherSeq.AppendInterval(6f);

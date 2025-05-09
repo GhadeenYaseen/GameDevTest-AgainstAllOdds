@@ -21,7 +21,7 @@ public class EnemyEagleFliesState : EnemyBaseState
         // select rand player as target
         EagleFlySeq.AppendCallback(()=>
         {
-            point = enemy._players[Random.Range(0,2)].transform.position;
+            point = enemy._players[Random.Range(0,GameManager.gameManagerInstance.playersCount)].transform.position;
             enemy.shadowObject.transform.position = point;
 
             enemy.shadowObject.SetActive(true);
